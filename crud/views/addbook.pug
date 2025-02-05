@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title Add Book
+  body
+    h1 Add Book
+    form(action="/books/add", method="post")
+      table
+        tr
+          td
+            label(for="title") Title:
+          td
+            input(type="text" name="title" id="title")
+        tr
+          td
+            label(for="author") Author:
+          td
+            input(type="text" name="author" id="author")
+        tr
+          td
+            label(for="genre") Genre:
+          td
+            input(type="text" name="genre" id="genre")
+        tr
+          td
+            label(for="published_year") Published Year:
+          td
+            input(type="number" name="published_year" id="published_year")
+        tr
+          td(colspan="2")
+            button(type="submit") Add Book

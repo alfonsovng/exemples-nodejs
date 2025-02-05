@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title Book List
+  body
+    h1 Book List
+    if books.length > 0
+      ul
+        each book in books
+          li
+            span #{book.title} - #{book.author} (Genre: #{book.genre}, Published Year: #{book.published_year}, Book Id: #{book._id})
+            // Update book
+            a(href=`/books/update/${book._id}`) Update
+            // Delete book
+            form(action=`/books/delete/${book._id}?_method=DELETE`, method="post")
+              button(type="submit") Delete
+    else
+      p No books available.
+    
+    // Anchor link to the Add Book Page
+    a(href="/books/add") Add Book
