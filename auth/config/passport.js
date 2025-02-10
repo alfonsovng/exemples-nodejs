@@ -1,10 +1,12 @@
-const LocalStrategy = require('passport-local').Strategy;
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcryptjs');
+const session = require('express-session');
 
 // Load User model
 const User = require('../models/User');
 
-module.exports = function(passport) {
+module.exports = function(app) {
   passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
       // Match user
@@ -40,4 +42,17 @@ module.exports = function(passport) {
       done(err, null);
     }
   });
+
+  // Express session
+  app.use(
+    session({
+      secret: 'secret',
+      resave: true,
+      saveUninitialized: true
+    })
+  );
+
+  // Passport middleware
+  app.use(passport.initialize());
+  app.use(passport.session());
 };

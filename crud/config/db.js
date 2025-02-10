@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 //mongodb uri
-const MONGO_URI = "MONGODB_URI_HERE"
+const MONGO_URI = 'MONGODB_URI_HERE'
 
 //connect to db
 const connectDB = async () => {

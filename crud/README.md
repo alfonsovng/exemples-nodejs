@@ -15,13 +15,17 @@ Install dependencies:
 
     npm install 
 
-Open db.js and add your MongoDB URI, local or Atlas.
+Open config/db.js and add your MongoDB URI, local or Atlas.
 
 ## Usage
 
 To start the server, run:
 
     npm start
+
+Or:
+
+    npm run dev
 
 Visit `http://localhost:3000` or your hosted address in your browser to access the app.
 
