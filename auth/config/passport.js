@@ -2,6 +2,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
+const mongoose = require('mongoose');
+var MongoStore = require('connect-mongo');
 
 // Load User model
 const User = require('../models/User');
@@ -44,13 +46,12 @@ module.exports = function(app) {
   });
 
   // Express session
-  app.use(
-    session({
-      secret: 'secret',
-      resave: true,
-      saveUninitialized: true
-    })
-  );
+  app.use(session({
+    secret:'secret',
+    maxAge: new Date(Date.now() + 3600000),
+    //store the session in the database
+    store: MongoStore.create({client: mongoose.connection.getClient()})   
+  }));
 
   // Passport middleware
   app.use(passport.initialize());
