@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Real-Time Chat</title>
+</head>
+<body>
+  <h1>Real-Time Chat<span id="client-id"></span></h1>
+  <div id="messages"></div>
+  <input type="text" id="messageInput" />
+  <button onclick="sendMessage()">Send</button>
+
+  <script>
+    const websocket = new WebSocket('ws://localhost:8080');
+    const clientId = Math.floor(Math.random() * 1000);
+    document.getElementById('client-id').innerText = ` (Client ${clientId})`;
+
+    // Event listener for WebSocket connection open
+    websocket.addEventListener('open', () => {
+      console.log('Connected to WebSocket server.');
+    });
+
+    // Event listener for incoming messages
+    websocket.addEventListener('message', (event) => {
+      const messagesDiv = document.getElementById('messages');
+      messagesDiv.innerHTML += `<p>${event.data.toString()}</p>`;
+    });
+
+    // Function to send messages
+    function sendMessage() {
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value;
+      websocket.send(JSON.stringify({
+        type: 'message',
+        payload: message,
+        clientId: clientId
+      }));
+      messageInput.value = '';
+    }
+  </script>
+</body>
+</html>
