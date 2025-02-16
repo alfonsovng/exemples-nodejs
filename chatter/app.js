@@ -10,11 +10,13 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // view engine setup
-const nunjucks = require('nunjucks')
+const nunjucks = require('nunjucks');
 nunjucks.configure('views', {
     autoescape: true,
     express: app
-})
+});
+app.engine('html', nunjucks.render);
+app.set('view engine', 'html');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -38,7 +40,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error.html');
+  res.render('error');
 });
 
 module.exports = app;
