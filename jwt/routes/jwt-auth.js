@@ -66,9 +66,10 @@ router.post('/login', async function(req, res) {
   if(bcrypt.compareSync(password, user.password)){
     // Create token if the password matched and no error was thrown
     const payload = {
-      user_id: user._id,
+      user_id: user.id,
       jwt_version: user.jwt_version
     };
+    console.log('payload', payload);
     const token = jwt.sign(payload, config.auth.secret, {
       expiresIn: "2 days"
     });

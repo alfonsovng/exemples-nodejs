@@ -11,7 +11,10 @@ module.exports = function(passport) {
   };
 
   passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
-    const user = await User.findOne({id: jwt_payload.id});
+    const user = await User.findById(jwt_payload.user_id);
+    console.log('jwt_payload', jwt_payload);
+    console.log('user', user);
+    
     if (user && user.jwt_version === jwt_payload.jwt_version) {
       done(null, user);
     } else {
