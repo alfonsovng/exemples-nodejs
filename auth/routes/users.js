@@ -13,7 +13,7 @@ router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 
 // Register
-router.post('/register', (req, res) => {
+router.post('/register',async (req, res) => {
   const { name, email, password, password2 } = req.body;
   let errors = false;
 
@@ -49,43 +49,37 @@ router.post('/register', (req, res) => {
       password2
     });
   } else {
-    User.findOne({ email: email }).then(user => {
-      if (user) {
-        req.flash(
-          'error_msg',
-          'Email already exists'
-        );
-        res.render('register', {
-          name,
-          email,
-          password,
-          password2
-        });
-      } else {
-        const newUser = new User({
-          name,
-          email,
-          password
-        });
+    const user = await User.findOne({ email: email });
+    if (user) {
+      req.flash(
+        'error_msg',
+        'Email already exists'
+      );
+      res.render('register', {
+        name,
+        email,
+        password,
+        password2
+      });
+    } else {
+      const newUser = new User({
+        name,
+        email,
+        password
+      });
 
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-              .save()
-              .then(user => {
-                req.flash(
-                  'success_msg',
-                  'You are now registered and can log in'
-                );
-                res.redirect('/users/login');
-              })
-              .catch(err => console.log(err));
-          });
-        });
-      }
-    });
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(req.body.password, salt);
+
+      newUser.password = hash;
+      await newUser.save()
+      
+      req.flash(
+        'success_msg',
+        'You are now registered and can log in'
+      );
+      res.redirect('/users/login');
+    }
   }
 });
 
@@ -100,9 +94,6 @@ router.post('/login', (req, res, next) => {
 
 // Logout
 router.get('/logout', (req, res, next) => {
-  // req.logout();
-  // req.flash('success_msg', 'You are logged out');
-  // res.redirect('/users/login');
   req.logout(function(err) {
     if (err) { return next(err); }
     req.flash('success_msg', 'You are logged out');
