@@ -39,7 +39,7 @@ router.post('/register', async function(req, res) {
   await newUser.save();
   res.json({
     success: true,
-    message: 'Successfully created new user.'
+    data: {}
   });
 });
 
@@ -76,8 +76,9 @@ router.post('/login', async function(req, res) {
 
     res.json({
       success: true,
-      message: 'Authentication successfull',
-      token
+      data: {
+        token: token
+      }
     });
   } else {
     res.send({
@@ -94,7 +95,7 @@ router.delete('/logout', passport.authenticate('jwt', {
   await req.user.save();
   res.json({
     success: true,
-    message: 'Successfully logged out.'
+    data: {}
   });
 });
 

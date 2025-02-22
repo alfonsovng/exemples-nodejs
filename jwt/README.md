@@ -11,6 +11,8 @@ When a user is authenticated, the `jwt token` is sent to the client which has to
 
 ## API endpoints
 
+The [demo_data](./demo_data/) folder contains a postman collection to test it.
+
 ### Register a user: `/jwt-auth/register`
 
 ```
@@ -52,14 +54,15 @@ Cache-Control: no-cache
 Postman-Token: 4c39ba30-491d-37aa-c4d6-1d770c15e75f
 ```
 
-### Logout
+### Logout: `/jwt-auth/logout`
 
+You need put the `jwt token` in the request header, using `Authorization` key field and concat `"JWT " + jwtToken` in the value field.
 ```
 DELETE /jwt-auth/logout HTTP/1.1
+Host: localhost:3000
 Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjdiODliZmIzMjI1MmFhNDhmNThlMGFkIiwiand0X3ZlcnNpb24iOjAsImlhdCI6MTc0MDE1MTkyNSwiZXhwIjoxNzQwMzI0NzI1fQ.ZraM8Emgn-0QU__9ALy2MPH5cJPI8zSkPHpn9kZ8DcA
 User-Agent: PostmanRuntime/7.39.1
 Accept: */*
 Cache-Control: no-cache
 Postman-Token: 3eda45ff-3e48-4742-ac51-488c47e9c89c
-Host: 127.0.0.1:3000
 ```

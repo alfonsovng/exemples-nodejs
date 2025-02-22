@@ -15,7 +15,7 @@ Install dependencies:
 
     npm install 
 
-Open config/db.js and add your MongoDB URI, local or Atlas.
+Open `config/db.js` and add your MongoDB URI, local or Atlas.
 
 ## Usage
 

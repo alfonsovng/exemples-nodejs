@@ -1,0 +1,14 @@
+[{
+  "_id": {
+    "$oid": "67b97aba9670f7b60a07481e"
+  },
+  "title": "First post",
+  "content": "Example of a post"
+},
+{
+  "_id": {
+    "$oid": "67b97b5e9670f7b60a074820"
+  },
+  "title": "Another post",
+  "content": "Another example of a post"
+}]
