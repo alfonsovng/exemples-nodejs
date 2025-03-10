@@ -7,4 +7,5 @@ Codi d'exemple:
 * [crud](./crud/): exemple de crud a partir del repositori https://github.com/adarsh-2425/simple-node-app
 * [jwt](./jwt): exemple d'autenticació JWT a partir del repositori: https://github.com/KNTH01/express-jwt-mongoose-example
 * [api](./api/): exemple d'API a partir del repositori: https://github.com/rahmanfadhil/learn-express-mongoose
-* [ws](./ws/): exemple de com fer servir websockets
+* [ws1](./ws1/): exemple bàsic de com fer servir websockets
+* [ws2](./ws2/): exemple de com fer servir websockets amb classes
