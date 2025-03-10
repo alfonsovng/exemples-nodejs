@@ -2,13 +2,12 @@ const express = require('express');
 
 const app = express();
 
-const Chat = require('./chat/chat');
-const chat = new Chat("localhost", 8080);
+const chat = require('./chat/chat');
 
 app.get("/", (req, res) => {
   const client_ids = chat.get_client_ids();
   
-  res.send("<ul>" + client_ids.map((id) => `<li>${id}</li>`).join('') + "</ul>");
+  res.send("<h2>Usuaris online:</h2><ul>" + client_ids.map((id) => `<li>${id}</li>`).join('') + "</ul>");
 });
 
 // Start the server

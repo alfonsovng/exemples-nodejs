@@ -33,29 +33,21 @@ class Chat {
     on_message(client, json) {
         console.log('Received message:', json, "from client with id:", client.id);
         
+        //afegim el client que ha enviat el missatge
         json.from = client.id;
 
-        if(json.to === "all") {
-            //envio el missatge a tothom menys al client que l'ha enviat
-            this.client_map.forEach((dst_client) => {
-                if(dst_client.id !== client.id) {
-                    const is_client_alive = dst_client.send(json);
-                    if(!is_client_alive) {
-                        //compte amb això: https://stackoverflow.com/q/35940216
-                        this.remove_client(dst_client);
-                    }
-                }
-            }); 
-        } else {
-            const dst_client = this.client_map.get(json.to);
-            if(dst_client) {
-                const is_client_alive = dst_client.send(json);
-                if(!is_client_alive) {
-                    this.remove_client(dst_client);
-                }
-            } else {
-                console.log('Client with id:', json.to, 'not found.');
+        const dst_client = this.client_map.get(json.to);
+        if(dst_client) {
+            //envio el missatge al client origen, és més fàcil fer que el client
+            //revi tots els missatges i els mostri a la pantalla
+            client.send(json);
+
+            const is_client_alive = dst_client.send(json);
+            if(!is_client_alive) {
+                this.remove_client(dst_client);
             }
+        } else {
+            console.log('Client with id:', json.to, 'not found.');
         }
     }
 
@@ -74,5 +66,5 @@ class Chat {
     }
 }
 
-//exporto la classe Chat
-module.exports = Chat
+//exporto una instancia de la clase Chat
+module.exports = new Chat('localhost', 8080);

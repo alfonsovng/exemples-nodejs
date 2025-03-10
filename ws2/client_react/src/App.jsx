@@ -6,7 +6,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [ws, setWs] = useState(null);
 
-  const [to, setTo] = useState('all');
+  const [to, setTo] = useState('');
   const [content, setContent] = useState('');
 
   useEffect(() => {
