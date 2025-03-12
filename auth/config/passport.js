@@ -44,7 +44,10 @@ module.exports = function(app) {
     secret:'secret',
     maxAge: new Date(Date.now() + 3600000),
     //store the session in the database
-    store: MongoStore.create({client: mongoose.connection.getClient()})   
+    store: MongoStore.create({ client: mongoose.connection.getClient() }) 
+
+    //alternative version
+    //store: MongoStore.create({ mongoUrl: require('./config/keys').mongoURI })
   }));
 
   // Passport middleware
