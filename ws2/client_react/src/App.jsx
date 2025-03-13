@@ -10,10 +10,16 @@ function App() {
   const [content, setContent] = useState('');
 
   useEffect(() => {
-    const websocket = new WebSocket('ws://localhost:8080/' + clientId);
+    const websocket = new WebSocket('ws://localhost:8080/');
 
     websocket.onopen = () => {
       console.log('WebSocket is connected');
+
+      //el primer missatge és per identificar-se
+      websocket.send(JSON.stringify({
+        type: "auth",
+        clientId: clientId
+      }));
     };
 
     websocket.onmessage = (evt) => {
@@ -38,7 +44,8 @@ function App() {
   const sendMessage = () => {
     if (ws) {
       ws.send(JSON.stringify({
-        to: to,
+        type: "chat",
+        to: parseInt(to),
         content: content
       }));
       setContent('');
