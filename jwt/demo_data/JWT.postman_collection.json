@@ -16,12 +16,12 @@
 					"urlencoded": [
 						{
 							"key": "email",
-							"value": "test@mail.com",
+							"value": "{{email}}",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "patata",
+							"value": "{{contrasenya}}",
 							"type": "text"
 						}
 					]
@@ -46,6 +46,18 @@
 		},
 		{
 			"name": "LOGIN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonResponse = pm.response.json();",
+							"pm.collectionVariables.set(\"token\", jsonResponse.data.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -54,12 +66,12 @@
 					"urlencoded": [
 						{
 							"key": "email",
-							"value": "test@mail.com",
+							"value": "{{email}}",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "patata",
+							"value": "{{contrasenya}}",
 							"type": "text"
 						}
 					]
@@ -84,18 +96,9 @@
 		},
 		{
 			"name": "DASHBOARD",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [
-					{
-						"key": "Cookie",
-						"value": "connect.sid=s%3APywG52QEmSF97PndUpGEFagX_254QTPb.%2FYtN7Zxw1uMXfdZM%2BygD3QejgTGrW3k5P23Tn03DB0U",
-						"name": "cookie",
-						"type": "text"
-					},
 					{
 						"key": "Cache-Control",
 						"value": "no-cache",
@@ -152,25 +155,10 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjdiODliZmIzMjI1MmFhNDhmNThlMGFkIiwiand0X3ZlcnNpb24iOjAsImlhdCI6MTc0MDE1MTkyNSwiZXhwIjoxNzQwMzI0NzI1fQ.ZraM8Emgn-0QU__9ALy2MPH5cJPI8zSkPHpn9kZ8DcA",
+						"value": "JWT {{token}}",
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "email",
-							"value": "test@mail.com",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "patata",
-							"type": "text"
-						}
-					]
-				},
 				"url": {
 					"raw": "http://127.0.0.1:3000/dashboard",
 					"protocol": "http",
@@ -194,12 +182,6 @@
 				"method": "DELETE",
 				"header": [
 					{
-						"key": "Cookie",
-						"value": "connect.sid=s%3APywG52QEmSF97PndUpGEFagX_254QTPb.%2FYtN7Zxw1uMXfdZM%2BygD3QejgTGrW3k5P23Tn03DB0U",
-						"name": "cookie",
-						"type": "text"
-					},
-					{
 						"key": "Cache-Control",
 						"value": "no-cache",
 						"name": "cache-control",
@@ -209,18 +191,6 @@
 						"key": "Postman-Token",
 						"value": "<calculated when request is sent>",
 						"name": "postman-token",
-						"type": "text"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"name": "content-type",
-						"type": "text"
-					},
-					{
-						"key": "Content-Length",
-						"value": "<calculated when request is sent>",
-						"name": "content-length",
 						"type": "text"
 					},
 					{
@@ -255,7 +225,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjdiODliZmIzMjI1MmFhNDhmNThlMGFkIiwiand0X3ZlcnNpb24iOjAsImlhdCI6MTc0MDE1MTkyNSwiZXhwIjoxNzQwMzI0NzI1fQ.ZraM8Emgn-0QU__9ALy2MPH5cJPI8zSkPHpn9kZ8DcA",
+						"value": "JWT {{token}}",
 						"type": "text"
 					}
 				],
@@ -276,6 +246,23 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "email",
+			"value": "alfonso@mir.cat",
+			"type": "string"
+		},
+		{
+			"key": "contrasenya",
+			"value": "patata",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "FES_UN_LOGIN_PER_TENIR_UN_TOKEN",
+			"type": "string"
 		}
 	]
 }
