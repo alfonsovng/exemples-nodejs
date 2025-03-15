@@ -4,4 +4,4 @@ This is the source code of [my tutorial](https://rahmanfadhil.com/express-rest-a
 
 Edit the `index.js` file and add and add your MongoDB URI and run `npm start`.
 
-The [demo_data](./demo_data/) folder contains a postman collection to test the app.
+The [postman](./postman/) folder contains a postman collection to test the app.

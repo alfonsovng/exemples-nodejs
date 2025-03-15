@@ -11,7 +11,7 @@ When a user is authenticated, the `jwt token` is sent to the client which has to
 
 ## API endpoints
 
-The [demo_data](./demo_data/) folder contains a postman collection to test the app.
+The [postman](./postman/) folder contains a postman collection to test the app.
 
 ### Register a user: `/jwt-auth/register`
 
